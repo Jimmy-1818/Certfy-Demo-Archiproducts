@@ -25,38 +25,6 @@ const flex_container_steps = document.querySelectorAll('.flex_container_steps')
 const margin = 2
 
 
-//MENAGE ARROWS IN SLIDESHOW
-function updateScrollArrows(DOM_object) {
-  var container_width = DOM_object.clientWidth;
-  var scroll_amount = DOM_object.scrollLeft;
-  var overflowed_width = DOM_object.querySelector('.steps_container').clientWidth;
-  var scroll_percentage = (scroll_amount / (overflowed_width - container_width)) * 100;
-  var scroll_necessity = overflowed_width > (container_width +  2 * margin)
-  var scroll_left = DOM_object.querySelector('.scroll-left')
-  var scroll_right = DOM_object.querySelector('.scroll-right')
-  
-  if (scroll_necessity){
-    
-    if (scroll_percentage < 0 + margin) {
-      scroll_left.classList.remove('scroll_show');
-      scroll_right.classList.add('scroll_show');
-    }
-    else if (scroll_percentage > 100 - margin) {
-      scroll_right.classList.remove('scroll_show');
-      scroll_left.classList.add('scroll_show');
-    }
-    else {
-      scroll_left.classList.add('scroll_show');
-      scroll_right.classList.add('scroll_show');
-    }
-  }
-  if ((!scroll_necessity) && (scroll_left.classList.contains('scroll_show') || scroll_right.classList.contains('scroll_show'))){
-    scroll_right.classList.remove('scroll_show');
-    scroll_left.classList.remove('scroll_show');
-  }
-  
-};
-
 function push_state(){
   // if (window.location.href == "http://127.0.0.1:5500/index.html"){
     var currentURL = window.location.href;
@@ -71,11 +39,8 @@ function push_state(){
 
 
 //open then show only the right version by its ID
-const steps_container = document.querySelector('.steps-container')
 const back_btn_object_steps = document.querySelector('#back_btn2')
-const step_version = steps_container.querySelectorAll('.step_version')
 function open_steps(element_aimed){ 
-  steps_container.classList.add('show_from_left')
   back_btn_object_steps.classList.add('show_from_left')
   var aimed_id = element_aimed.id
   step_version[aimed_id-1].classList.add('show_version')
@@ -133,40 +98,6 @@ function remove_show_from_left(){
     })}, 100)
   }
 )};
-
-// throw the function once: LOADED, SCROLL slideshow, RESIZE vindow
-document.addEventListener('DOMContentLoaded', function() {
-  window.addEventListener("resize", function(){
-    flex_container_steps.forEach(f_container_steps =>{
-      updateScrollArrows(f_container_steps)
-    });
-  });
-  flex_container_steps.forEach(f_container_steps => {
-    updateScrollArrows(f_container_steps)
-    f_container_steps.addEventListener('scroll', function(){
-      updateScrollArrows(f_container_steps)});
-    });
-});
-leftArrow.forEach(left_arrow => {
-  left_arrow.addEventListener('click', function() {
-    var contentContainer = this.parentElement
-    var scrollAmount = contentContainer.clientWidth / 2;
-    contentContainer.scrollTo({
-      left: contentContainer.scrollLeft - scrollAmount,
-      behavior: 'smooth'
-    });
-  });
-});
-rightArrow.forEach(right_arrow => {
-  right_arrow.addEventListener('click', function() {
-    var contentContainer = this.parentElement
-    var scrollAmount = contentContainer.clientWidth / 2;
-    contentContainer.scrollTo({
-      left: contentContainer.scrollLeft + scrollAmount,
-      behavior: 'smooth'
-    });
-  });
-});
 
 
 
