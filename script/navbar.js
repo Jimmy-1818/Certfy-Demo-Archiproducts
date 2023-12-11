@@ -32,8 +32,7 @@ function hamburger_click(){
   var desktop_nav = document.getElementsByClassName("desktop-nav")[0]
   
   //CLOSING
-  var in_pop_up = steps_container.classList.contains('show_from_left') || info_container.classList.contains('show_from_left') 
-  if (hamburger[0].classList.contains("show") && !in_pop_up){
+  if (hamburger[0].classList.contains("show")){
     navbar_width_scroll_control()
     if (window.scrollY == 0){
       desktop_nav.classList.remove("desktop_nav_shadow")
@@ -286,13 +285,11 @@ navbar_width_scroll_control()
 
 
 function navbar_width_scroll_control(){
-  const steps_container = document.querySelector('.steps-container')
   const info_container = document.querySelector('.info-container')
-  var in_pop_up = steps_container.classList.contains('show_from_left') || info_container.classList.contains('show_from_left') 
   desktop_nav = document.getElementsByClassName("desktop-nav")[0]
 
   //ON TOP
-  if (window.scrollY == 0 && !in_pop_up){
+  if (window.scrollY == 0){
     setTimeout(() => {
       change_logo_dark()
     }, 100);
@@ -313,7 +310,7 @@ function navbar_width_scroll_control(){
     change_logo_light()
     desktop_nav.style.height = "62px"
     //SCROLL IN BASSO
-    if ((lastSctollY < window.scrollY && !(menu_mobile.classList.contains("show-mobile")) && ($(window).width() < 1024)) && !in_pop_up) {
+    if ((lastSctollY < window.scrollY && !(menu_mobile.classList.contains("show-mobile")) && ($(window).width() < 1024))) {
       desktop_nav = document.getElementsByClassName("desktop-nav")[0]
       desktop_nav.classList.add("navbar-hide")
     }
